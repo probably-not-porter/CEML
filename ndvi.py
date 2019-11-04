@@ -51,17 +51,12 @@ class NDVI(object):
         fig.savefig(self.output_name, dpi=600, transparent=True, bbox_inches=extent, pad_inches=0)
         # plt.show()
 
-def main():
-    inputFileName = input("Enter the input JPG filename: ")
-    # test for existance inside a try 
-    
-    output_file = input("Enter the output PNG filename: ")
-    colors = False 
-    
-    # prompt for custom color map 
-    
+#modified this function to take params as input instead of asking for the from command line ;)
+def createNDVI(inputFileName, output_file, colors): # Enter the input JPG filename, Enter the output PNG filename, False
+
     blue_ndvi = NDVI(inputFileName, output_file=output_file or False, colors=colors or False)
     blue_ndvi.convert()
+    print('Created ' + str(output_file))
 
-if __name__ == "__main__":
-    main()
+#
+#took out if name == __main__ statement
