@@ -5,7 +5,7 @@ import ndvi
 
 detector_selection = [False,False,False]
 input_folder = None
-output_folder = None
+ndvi_folder = None
 
 class SRSD_GUI:
     def __init__(self, master):
@@ -21,7 +21,7 @@ class SRSD_GUI:
 
         self.ndvi_label = StringVar()
         self.ndvi_label.set("NDVI Folder: None")
-        self.label12 = Label(master, text="Output Folder: None",textvariable=self.ndvi_label).grid(row=3,column=0)
+        self.label12 = Label(master, text="NDVI Folder: None",textvariable=self.ndvi_label).grid(row=3,column=0)
         self.select_ndvi_button = Button(master, text="Choose", command=self.select_ndvi_folder).grid(row=4,column=0)
 
         self.createndvi_button = Button(master, text="Create NDVI", command=self.run).grid(row=5,column=0)
@@ -57,7 +57,10 @@ class SRSD_GUI:
         folder_selected = filedialog.askdirectory()
         ndvi_folder = folder_selected
         self.ndvi_label.set("NDVI Folder: " + ndvi_folder)
+
     def create_ndvi(self):
+        #for each file
+        ndvi.createNDVI() # Enter the input JPG filename, Enter the output PNG filename, False
 
 
 root = Tk()
