@@ -1,8 +1,13 @@
 # SRSD (Subterrainian Rectilinear Shape Detection)
-Subterranean Rectilinear Shape Detector
 
-run srsd.py with python3 to see current GUI. Allows the user to create ndvi version of an image folder (TAKES A LONG TIME)
-expects to be given a folder with images, and will create the following structure:
+## Installation
+
+1. Make sure you have python3.x.
+2. install dependencies listed below.
+3. run `python3 srsd.py` to start the GUI.
+
+## Usage
+The first input that is expected is your <strong>master data directory</strong>, which will determine what operations are available for the rest of the execution. A typical structure for the master data directory looks like this:
 
 >DIR </br>
 >including any input images.
@@ -10,10 +15,18 @@ expects to be given a folder with images, and will create the following structur
 >>processed NDVI versions of the images in DIR </br></br>
 >>DIR / NIR</br>
 >>NIR versions of the images in DIR
-* the program will attempt to detect any folders in this structure that are manually included, based on file name. 
-* each type of image will be used in the edge detection operations, so each of these modifiers adds a lot to processing time.
 
-# References
+* The program will attempt to detect any folders in this structure that are manually included, based on folder name.
+  
+* Each type of image will be used in the edge detection operations, so each of these modifiers adds a lot to processing time.
+
+Once the folder is set up, you have the option to create additional resources like NDVI if they do not exist, and pick what edge detectors you want to use on the available set of data.
+
+## Dependencies
+- tkinter
+- matplotlib
+- getopt
+## References
 https://rosettacode.org/wiki/Canny_edge_detector
 
 https://github.com/OlafenwaMoses/ImageAI
