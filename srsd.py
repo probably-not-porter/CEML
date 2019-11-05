@@ -2,6 +2,7 @@ from tkinter import filedialog
 from tkinter import StringVar
 from tkinter import *
 import os
+import time
 
 #other files
 import ndvi
@@ -24,6 +25,9 @@ class SRSD_GUI:
         self.label1 = Label(master, text="Input Folder: None",textvariable=self.img_label).grid(row=0,column=0)
         self.select_folder_button = Button(master, text="Choose", command=self.select_img_folder).grid(row=0,column=1)
 
+        self.ndvi_loading = StringVar()
+        self.ndvi_loading.set("select folder...")
+        self.ndvi_label = Label(master, text="",textvariable=self.ndvi_loading).grid(row=6,column=0)
         self.createndvi_button = Button(master, text="Create NDVI", command=self.create_ndvi).grid(row=5,column=0)
         
         # COLUMN 2
@@ -53,22 +57,33 @@ class SRSD_GUI:
         self.input_folder = folder_selected
         self.ndvi_folder = folder_selected + "/ndvi"
 
-
         self.img_label.set("Input Folder: " + folder_selected)
         print(self.input_folder,self.ndvi_folder)
+
+        total_files = 0
+        for filename in os.listdir(self.input_folder):
+            if (filename[-4:] == ".jpg") or (filename[-4:] == ".JPG") or (filename[-4:] == ".png"):
+                total_files = total_files + 1
+
+        self.ndvi_loading.set("Found " + str(total_files) + " images to convert")
         
 
     def create_ndvi(self):
+        self.ndvi_loading.set("Working...")
         try:
             os.mkdir(self.ndvi_folder)
         except OSError:
             print ("Creation of the directory %s failed" % self.ndvi_folder)
-        
+
+        current_file = 0
         for filename in os.listdir(self.input_folder):
             if (filename[-4:] == ".jpg") or (filename[-4:] == ".JPG") or (filename[-4:] == ".png"):
-                print(filename)
-                ndvi.createNDVI(str(self.input_folder) + "/" + str(filename), self.ndvi_folder + "/" + "ndvi_" + str(filename), False) # Enter the input JPG filename, Enter the output PNG filename, False
+                current_file = current_file + 1
 
+                print(filename)
+                time.sleep(1)
+                ndvi.createNDVI(str(self.input_folder) + "/" + str(filename), self.ndvi_folder + "/" + "ndvi_" + str(filename), False) # Enter the input JPG filename, Enter the output PNG filename, False
+        self.ndvi_loading.set("Done.")
 
 root = Tk()
 my_gui = SRSD_GUI(root)
