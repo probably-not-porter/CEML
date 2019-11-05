@@ -141,8 +141,7 @@ class SRSD_GUI:
                 current_file = current_file + 1
 
                 print(filename)
-                time.sleep(1)
-                #ndvi.createNDVI(str(self.input_folder) + "/" + str(filename), self.ndvi_folder + "/" + "ndvi_" + str(filename), False) # Enter the input JPG filename, Enter the output PNG filename, False
+                ndvi.createNDVI(str(self.input_folder) + "/" + str(filename), self.ndvi_folder + "/" + "ndvi_" + str(filename), False) # Enter the input JPG filename, Enter the output PNG filename, False
         self.ndvi_loading.set("Done.")
         self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder, self.caney_folder]))
         

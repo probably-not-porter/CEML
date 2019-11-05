@@ -45,10 +45,10 @@ class NDVI(object):
         image = ax.imshow(NDVI, cmap=self.create_colormap(*self.colors))
         plt.axis('off')
 
-        self.create_colorbar(fig, image)
+        #self.create_colorbar(fig, image)
 
         extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-        fig.savefig(self.output_name, dpi=600, transparent=True, bbox_inches=extent, pad_inches=0)
+        fig.savefig(self.output_name, dpi=300, transparent=True, bbox_inches=extent, pad_inches=0)
         # plt.show()
 
 #modified this function to take params as input instead of asking for the from command line ;)
