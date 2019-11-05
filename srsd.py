@@ -38,7 +38,7 @@ class SRSD_GUI:
         self.ndvibutton.grid(row=5,column=0)
         
         # COLUMN 2
-        col2_frame = Frame(root, bg='darkgray', width = 250, height=300, pady=20, padx=20).grid(row=0, column=2, columnspan=1, rowspan=10)
+        col2_frame = Frame(root, bg='darkgray', width = 400, height=300, pady=20, padx=20).grid(row=0, column=2, columnspan=1, rowspan=10)
         self.label3 = Label(master, text="Select Edge Detector:")
         self.label3.grid(row=0,column=2)
 
@@ -50,7 +50,7 @@ class SRSD_GUI:
         Checkbutton(master, text="Sobel Detector", variable=self.var3,command=self.cb).grid(row=3, column=2, sticky=W)
 
         self.imagestoprocess = StringVar()
-        self.imagestoprocess.set("0")
+        self.imagestoprocess.set("select folder to see process-able images here...")
         self.imagescount_label = Label(master, text="",textvariable=self.imagestoprocess)
         self.imagescount_label.grid(row=6,column=2)
 
