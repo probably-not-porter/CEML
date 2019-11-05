@@ -11,10 +11,13 @@ The first input that is expected is your <strong>master data directory</strong>,
 
 >DIR </br>
 >including any input images.
->>DIR / ndvi </br>
+>>DIR/ndvi </br>
 >>processed NDVI versions of the images in DIR </br></br>
->>DIR / NIR</br>
->>NIR versions of the images in DIR
+>>DIR/nir</br>
+>>NIR versions of the source images in DIR</br></br>
+>>DIR/caney</br>
+>>Edge detections of source images in DIR with Cv2 Caney</br>
+
 
 * The program will attempt to detect any folders in this structure that are manually included, based on folder name.
   
@@ -26,6 +29,7 @@ Once the folder is set up, you have the option to create additional resources li
 - tkinter
 - matplotlib
 - getopt
+- opencv-python
 ## References
 https://rosettacode.org/wiki/Canny_edge_detector
 

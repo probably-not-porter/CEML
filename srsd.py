@@ -5,7 +5,8 @@ import os
 import time
 
 #other files
-import operations.ndvi
+import operations.ndvi as ndvi
+import operations.edge_detectors as edge_detectors
 
 
 
@@ -17,6 +18,7 @@ class SRSD_GUI:
         self.detector_selection = [False,False,False]
         self.input_folder = None
         self.ndvi_folder = None
+        self.caney_folder = None
         self.images = 0
 
         # COLUMN 1
@@ -70,7 +72,23 @@ class SRSD_GUI:
         print(self.detector_selection)
     
     def run(self):
-        print('not set up yet')
+        print('caney only')
+        try:
+            os.mkdir(self.caney_folder)
+        except OSError:
+            print ("Creation of the directory %s failed" % self.caney_folder)
+
+        current_file = 0
+        for filename in os.listdir(self.input_folder):
+            if (filename[-4:] == ".jpg") or (filename[-4:] == ".JPG") or (filename[-4:] == ".png"):
+                current_file = current_file + 1
+
+                print(filename)
+                time.sleep(1)
+                edge_detectors.caney_edge(str(self.input_folder) + "/" + str(filename), self.caney_folder + "/" + "caney_" + str(filename)) #get detection
+        print('done')
+        self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder,self.caney_folder]))
+
 
     def getImagesToProcess(self, folders_arr):
         total_file = 0
@@ -98,6 +116,7 @@ class SRSD_GUI:
         folder_selected = filedialog.askdirectory()
         self.input_folder = folder_selected
         self.ndvi_folder = folder_selected + "/ndvi"
+        self.caney_folder = folder_selected + "/caney"
 
         self.img_label.set("Input Folder: " + folder_selected)
         print(self.input_folder,self.ndvi_folder)
@@ -107,7 +126,7 @@ class SRSD_GUI:
             if (filename[-4:] == ".jpg") or (filename[-4:] == ".JPG") or (filename[-4:] == ".png"):
                 total_files = total_files + 1
         self.ndvi_loading.set("Found " + str(total_files) + " images to convert")
-        self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder])) 
+        self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder, self.caney_folder])) 
 
     def create_ndvi(self):
         self.ndvi_loading.set("Working...")
@@ -125,7 +144,7 @@ class SRSD_GUI:
                 time.sleep(1)
                 #ndvi.createNDVI(str(self.input_folder) + "/" + str(filename), self.ndvi_folder + "/" + "ndvi_" + str(filename), False) # Enter the input JPG filename, Enter the output PNG filename, False
         self.ndvi_loading.set("Done.")
-        self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder]))
+        self.imagestoprocess.set(self.getImagesToProcess([self.input_folder,self.ndvi_folder, self.caney_folder]))
         
 
 root = Tk()
