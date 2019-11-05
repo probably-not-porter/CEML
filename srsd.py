@@ -5,7 +5,7 @@ import os
 import time
 
 #other files
-import ndvi
+import operations.ndvi
 
 
 
