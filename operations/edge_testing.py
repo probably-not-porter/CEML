@@ -11,6 +11,8 @@ import time
 # Should be similar to the edge_detectors.py, but less
 # formatted and cleaned up, and not hooked into the GUI.
 
+myres = 1000 #output DPI
+
 def caney_edge_test(image, outdir): # testing version of caney function, times execution.
     start = time.time()
 
@@ -105,7 +107,14 @@ def sobel_edge_y_test(image,outdir):
     print("Total time: " + str(end - start))
 
 
+# tests are not set up to be abstracted, they require specific folders and images to exist, 
+# so tweaking the input and outputs below may be necissary.
+
+print('\nRunning Caney Edge')
 caney_edge_test("/home/porter/Dev/SRSD/images/car.jpg", "/home/porter/Dev/SRSD/test_images/caney")
+print('\nRunning Sobel Operator X')
 sobel_edge_x_test("/home/porter/Dev/SRSD/images/car.jpg", "/home/porter/Dev/SRSD/test_images/sx")
+print('\nRunning Sobel Operator Y')
 sobel_edge_y_test("/home/porter/Dev/SRSD/images/car.jpg", "/home/porter/Dev/SRSD/test_images/sy")
+print('\nRunning Laplacian Operator')
 laplacian_edge_test("/home/porter/Dev/SRSD/images/car.jpg", "/home/porter/Dev/SRSD/test_images/l")
