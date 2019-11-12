@@ -1,3 +1,9 @@
 /.vscode
 /images
 /test_images
+
+*.pyc
+__pycache__
+MANIFEST
+build
+dist
