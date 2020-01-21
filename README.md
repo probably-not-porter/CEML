@@ -30,6 +30,9 @@ Once the folder is set up, you have the option to create additional resources li
 - matplotlib
 - getopt
 - opencv-python
+- tensorflow
+- imageai
+
 ## References
 https://rosettacode.org/wiki/Canny_edge_detector
 
