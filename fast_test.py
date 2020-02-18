@@ -4,8 +4,7 @@
 from fastai.vision import *
 import fastai
 
-path = untar_data(URLs.PETS)
-print(path)
-data = ImageDataBunch.from_folder(path, train="images", valid="annotations", size=26)
+path = untar_data(URLs.PLANET_SAMPLE)
+data = ImageDataBunch.from_folder(path)
 learn = cnn_learner(data, models.resnet18, metrics=accuracy)
 learn.fit(1)
