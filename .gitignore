@@ -1,6 +1,7 @@
 /.vscode
 /images
 /test_images
+/training
 
 *.pyc
 __pycache__
