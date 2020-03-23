@@ -13,4 +13,5 @@ from dataglob import DataGlob # Data structure
 
 # testing
 glob1 = DataGlob(os.getcwd() + "/training/plant-id",os.getcwd() +"/out")
-glob1.prepareDatabase([1,1,1,0,0,0,0])
+glob1.print_configuration()
+glob1.prepareDatabase()
