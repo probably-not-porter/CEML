@@ -5,16 +5,12 @@
 | Spring 2020                                  |
 |----------------------------------------------|
 """
+import os
 
-# Import dependencies
-import argparse, glob, cv2, time, os, sys, shutil
-from PIL import Image
-from fastai.vision import *
-from matplotlib import pyplot as plt
-import numpy as np
-from scipy import ndimage as ndi
-from IPython.display import clear_output
-from datetime import datetime
-
-# Import custom code
+# import custom code
 from dataglob import DataGlob # Data structure
+
+
+# testing
+glob1 = DataGlob(os.getcwd() + "/training/plant-id",os.getcwd() +"/out")
+glob1.prepareDatabase([1,1,1,0,0,0,0])
