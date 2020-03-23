@@ -17,4 +17,4 @@ from IPython.display import clear_output
 from datetime import datetime
 
 # Import custom code
-import datablob
+from dataglob import DataGlob # Data structure
