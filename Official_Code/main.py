@@ -18,7 +18,7 @@ glob1._overwrite = True
 
 # adjust some knobs
 #glob1.set_configuration("original", True)
-#glob1.set_configuration("caney_auto", True)
+#glob1.set_configuration("canny_auto", True)
 #glob1.set_configuration("prewitt", True)
 
 glob1.prepare_control_database()

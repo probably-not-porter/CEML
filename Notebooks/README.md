@@ -1,4 +1,4 @@
-# Composite Edge Detection in Convolutional Neural Networks
+# Notebooks - Composite Edge Detection in Convolutional Neural Networks
 ## Porter Libby - Senior Capstone Project Spring 2020
 
 ## Tests
