@@ -2,7 +2,7 @@
 /images
 /test_images
 /training
-
+*/out
 *.pyc
 __pycache__
 .ipynb_checkpoints
