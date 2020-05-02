@@ -1,9 +1,12 @@
 # Composite Edge Detection in Convolutional Neural Networks
 ## Porter Libby - Senior Capstone Project Spring 2020
 
-[ --> Project Paper](https://www.overleaf.com/8823925963hjqntbvwmptf)</br>
-[ --> Full Project Results](https://docs.google.com/spreadsheets/d/1qyqohqzhbub78SLpHlpfEOhTde7OzPnzNIxzhM9vVpo/edit?usp=sharing)</br>
-[ --> Demo Video 1](https://www.youtube.com/watch?v=76ho3pDK99I)</br>
+[ --> Project Paper](https://www.overleaf.com/8823925963hjqntbvwmptf)
+
+[ --> Full Project Results](https://docs.google.com/spreadsheets/d/1qyqohqzhbub78SLpHlpfEOhTde7OzPnzNIxzhM9vVpo/edit?usp=sharing)
+
+[ --> Demo Video 1](https://www.youtube.com/watch?v=76ho3pDK99I)
+
 [ --> Demo Video 2](https://www.youtube.com/watch?v=VsJWdN05qO4)
 
 ## Project Layout
