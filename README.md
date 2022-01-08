@@ -1,5 +1,10 @@
 # Composite Edge Detection in Convolutional Neural Networks
-## Porter Libby - Senior Capstone Project Spring 2020
+
+## Winter 2022 (Version 2)
+New version of this project in working state can be found in the `v2` folder.
+
+
+## Spring 2020 (Senior Capstone Project)
 
 [ --> Project Paper](https://www.overleaf.com/8823925963hjqntbvwmptf)
 
