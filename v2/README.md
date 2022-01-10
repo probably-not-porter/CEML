@@ -14,7 +14,7 @@ My new design involves three main steps:
 ## Part 1
 Prepare your data. For this step, you will need a set of images to train a model. The images do not have to be the same size, or even the same file format, but they must be divided up into the catagories you would like to teach. 
 
-As an example, one of my testing sets is a binary image set with dogs and cats. In order to set this up, I placed the original data into two folders based in this root directory: `data/dogs_cats/dogs` and `data/dogs_cats/cats`. The processing step will take advantage of this file structure to simplify names and future runs, so make sure it is labeled sensibly.
+As an example, one of my testing sets is a binary image set with dogs and cats. In order to set this up, I placed the original data into two folders based in this root directory: `data/dogs_cats/dogs` and `data/dogs_cats/cats`. The processing step will take advantage of this file structure to simplify names and future runs, so make sure it is labeled sensibly. You can pass this information to the script with the arguement `-i` or `--input`.
 
 When I run:
 
@@ -22,15 +22,31 @@ When I run:
 
 I will get new folders in the `data` directory, labeled to match the pre-processors I selected in the command line (`data/dogs_cats-cannyauto` and `data/dogs_cats-cannywide`). Since original images are already present, there is no need to move them to a new folder, they are simply left unchanged. The composit version of these images, which will make use of all three versions of the `dogs_cats` dataset, will be labeled `data/dogs_cats-composit`.
 
+The options for edge detection pre-processing algorithms are:
+- `--canny_auto`
+- `--canny_wide`
+- `--canny_tight`
+- `--original`
+- `--laplacian`
+- `--sobel_x`
+- `--sobel_y`
+- `--prewitt`
+
 Note: When re-running the same data set, the program will not overwrite folders that already exist in order to save processing time. If I decide I want to make a composit with a different three algorithms, ones that do not exist will be generated, while those that have already been run will be re-used from last time. To avoid this, simply delete the folder and the program will generate them again.
 
+## Part 2
+Create a model of the prepared data.
+
+Options are:
+- `-i` or `--input` : Pass a directory to the model algorithm to create a model with.
+- `-m` or `--model` : Select a model. options are `resnet18`, `resnet34`, and `resnet50`. default = resnet18.
+- `-c` or `--cycles` : Number of cycles for the model to learn. default = 5.
 
 # Project Requirements
 My current environment for this version is as follows:
 - Python 3.9.2 64bit
 - Debian 11 (Bullseye)
 
-## `process_images.py`
 - numpy==1.22.0
 - opencv_python==4.5.5.62
 - Pillow==9.0.0
