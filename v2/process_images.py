@@ -30,8 +30,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-cannyauto/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-cannyauto/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     v = np.median(img)
                     lower = int(max(0, (1.0 - sigma) * v))
@@ -48,8 +52,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-cannywide/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-cannywide/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     cannywide = cv2.Canny(img, 10, 200)
                     cv2.imwrite(url +"-cannywide/"+ key +"/"+ image, cannywide)
@@ -63,8 +71,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-cannytight/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-cannytight/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     cannytight = cv2.Canny(img, 225, 250)
                     cv2.imwrite(url +"-cannytight/"+ key +"/"+ image, cannytight)
@@ -78,8 +90,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-laplacian/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-laplacian/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     lap = cv2.Laplacian(img,cv2.CV_64F)
                     cv2.imwrite(url +"-laplacian/"+ key +"/"+ image, lap)
@@ -93,8 +109,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-sobel_x/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-sobel_x/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)
                     cv2.imwrite(url +"-sobel_x/"+ key +"/"+ image, sobelx)
@@ -108,8 +128,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-sobel_y/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-sobel_y/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)
                     cv2.imwrite(url +"-sobel_y/"+ key +"/"+ image, sobely)
@@ -123,8 +147,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
         else:
             os.mkdir(url +"-prewitt/")
             for key in image_urls:
+                cat_total = len(image_urls[key])
+                count = 0
                 os.mkdir(url +"-prewitt/" + key)
                 for image in image_urls[key]:
+                    count = count + 1
+                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     p = ndi.prewitt(img) 
                     cv2.imwrite(url +"-prewitt/"+ key +"/"+ image, p)
@@ -156,12 +184,25 @@ def _create_multichannel_image(types, image_urls, url):
                 c = cv2.imread(url + types[2] + "/" + key + "/" + image, 0)
 
                 needed_multi_channel_img = np.zeros((a.shape[0], a.shape[1], 3))
+                needed_multi_channel_img2 = np.zeros((b.shape[0], b.shape[1], 3))
+                needed_multi_channel_img3 = np.zeros((c.shape[0], c.shape[1], 3))
 
                 needed_multi_channel_img [:,:,0] = a
                 needed_multi_channel_img [:,:,1] = b
                 needed_multi_channel_img [:,:,2] = c
+
+                needed_multi_channel_img2 [:,:,0] = b
+                needed_multi_channel_img2 [:,:,1] = c
+                needed_multi_channel_img2 [:,:,2] = a
+
+                needed_multi_channel_img3 [:,:,0] = c
+                needed_multi_channel_img3 [:,:,1] = a
+                needed_multi_channel_img3 [:,:,2] = b
                 
-                cv2.imwrite(url + label_ext +"-composit/"+ key +"/"+ image, needed_multi_channel_img)
+                cv2.imwrite(url + label_ext +"-composit/"+ key +"/abc_"+ image, needed_multi_channel_img)
+                cv2.imwrite(url + label_ext +"-composit/"+ key +"/bca_"+ image, needed_multi_channel_img2)
+                cv2.imwrite(url + label_ext +"-composit/"+ key +"/cab_"+ image, needed_multi_channel_img3)
+
     print("--> Done.")
 if __name__ == '__main__':
     # Specify Command line args
