@@ -35,7 +35,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-cannyauto/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     v = np.median(img)
                     lower = int(max(0, (1.0 - sigma) * v))
@@ -57,7 +56,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-cannywide/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     cannywide = cv2.Canny(img, 10, 200)
                     cv2.imwrite(url +"-cannywide/"+ key +"/"+ image, cannywide)
@@ -76,7 +74,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-cannytight/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     cannytight = cv2.Canny(img, 225, 250)
                     cv2.imwrite(url +"-cannytight/"+ key +"/"+ image, cannytight)
@@ -95,7 +92,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-laplacian/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     lap = cv2.Laplacian(img,cv2.CV_64F)
                     cv2.imwrite(url +"-laplacian/"+ key +"/"+ image, lap)
@@ -114,7 +110,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-sobel_x/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     sobelx = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=5)
                     cv2.imwrite(url +"-sobel_x/"+ key +"/"+ image, sobelx)
@@ -133,7 +128,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-sobel_y/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     sobely = cv2.Sobel(img,cv2.CV_64F,0,1,ksize=5)
                     cv2.imwrite(url +"-sobel_y/"+ key +"/"+ image, sobely)
@@ -152,7 +146,6 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
                 os.mkdir(url +"-prewitt/" + key)
                 for image in image_urls[key]:
                     count = count + 1
-                    print("------> Processing ["  + types[-1] + "] - " + image + " (" + str(count) + "/" + str(cat_total) + ")")
                     img = cv2.imread(url +"/"+ key +"/"+ image)
                     p = ndi.prewitt(img) 
                     cv2.imwrite(url +"-prewitt/"+ key +"/"+ image, p)

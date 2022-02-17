@@ -23,7 +23,7 @@ def main(input_dir, model, cycles):
 
     # Get Start Time
     dateTimeObj = datetime.now()
-    timestampStr = dateTimeObj.strftime("%d-%b-%Y_%H:%M:%S")
+    timestampStr = dateTimeObj.strftime("%d-%b-%Y_%H%M%S")
     os.mkdir('output_' + timestampStr)
     output_list[0] = "Start Time: " + timestampStr
 
