@@ -6,9 +6,9 @@ New version of this project in working state can be found in the `v2` folder.
 
 ## Spring 2020 (Senior Capstone Project)
 
-[ --> Project Paper](https://www.overleaf.com/8823925963hjqntbvwmptf)
+[ --> Project Paper](2020_Paper_Final.pdf)
 
-[ --> Full Project Results](https://docs.google.com/spreadsheets/d/1qyqohqzhbub78SLpHlpfEOhTde7OzPnzNIxzhM9vVpo/edit?usp=sharing)
+[ --> Project Results](2020_results.xlsx)
 
 [ --> Demo Video 1](https://www.youtube.com/watch?v=76ho3pDK99I)
 
