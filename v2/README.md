@@ -52,3 +52,4 @@ My current environment for this version is as follows:
 - Pillow==9.0.0
 - scipy==1.7.3
 
+

@@ -7,7 +7,7 @@ from scipy import ndimage as ndi
 
 def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original = False, laplacian = False, sobelX = False, sobelY = False, prewitt = False, comp = False):
 
-    # Global Settings
+    out_paths = []
     image_urls = {}
     types = []
     sigma=0.33
@@ -20,10 +20,12 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
             image_urls[classifier].append(image)
     
     if original:
+        out_paths.append(url +"-cannyauto/")
         types.append("")
 
     if cannyAuto:
         print("--> Processing Canny Auto...")
+        out_paths.append("url")
         types.append("-cannyauto")
         if os.path.exists(url +"-cannyauto/") and os.path.isdir(url +"-cannyauto/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-cannyauto/"+ ")")
@@ -45,6 +47,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if cannyWide:
         print("--> Processing Canny Wide...")
+        out_paths.append(url +"-cannywide/")
         types.append("-cannywide")
         if os.path.exists(url +"-cannywide/") and os.path.isdir(url +"-cannywide/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-cannywide/"+ ")")
@@ -63,6 +66,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if cannyTight:
         print("--> Processing Canny Tight")
+        out_paths.append(url +"-cannytight/")
         types.append("-cannytight")
         if os.path.exists(url +"-cannytight/") and os.path.isdir(url +"-cannytight/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-cannytight/"+ ")")
@@ -81,6 +85,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if laplacian:
         print("--> Processing Laplacian")
+        out_paths.append(url +"-laplacian/")
         types.append("-laplacian")
         if os.path.exists(url +"-laplacian/") and os.path.isdir(url +"-laplacian/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-laplacian/"+ ")")
@@ -99,6 +104,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if sobelX:
         print("--> Processing Sobel (x-axis)")
+        out_paths.append(url +"-sobel_x/")
         types.append("-sobel_x")
         if os.path.exists(url +"-sobel_x/") and os.path.isdir(url +"-sobel_x/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-sobel_x/"+ ")")
@@ -117,6 +123,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if sobelY:
         print("--> processing Sobel (y-axis)")
+        out_paths.append(url +"-sobel_y/")
         types.append("-sobel_y")
         if os.path.exists(url +"-sobel_y/") and os.path.isdir(url +"-sobel_y/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-sobel_y/"+ ")")
@@ -135,6 +142,7 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
 
     if prewitt:
         print("--> processing Prewitt")
+        out_paths.append(url +"-prewitt/")
         types.append("-prewitt")
         if os.path.exists(url +"-prewitt/") and os.path.isdir(url +"-prewitt/"):    # check if tmp_path exists
             print("--> Path already exists!  (" + url +"-prewitt/"+ ")")
@@ -153,7 +161,10 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
     
     # create composit of the selected types
     if comp == True:
-        _create_multichannel_image(types, image_urls, url)
+        comp_out = _create_multichannel_image(types, image_urls, url)
+        out_paths.append(comp_out)
+        
+    return out_paths
 
 def _create_multichannel_image(types, image_urls, url):
     """ Open multiple images and return a single multi channel image """
@@ -162,6 +173,7 @@ def _create_multichannel_image(types, image_urls, url):
     for x in types:
         label_ext += x
 
+   
 
     if os.path.exists(url + label_ext +"-composit/") and os.path.isdir(url + label_ext +"-composit/"):    # check if tmp_path exists
         print("--> Path already exists!  (" + url + label_ext +"-composit/"+ ")")
@@ -195,8 +207,9 @@ def _create_multichannel_image(types, image_urls, url):
                 cv2.imwrite(url + label_ext +"-composit/"+ key +"/abc_"+ image, needed_multi_channel_img)
                 cv2.imwrite(url + label_ext +"-composit/"+ key +"/bca_"+ image, needed_multi_channel_img2)
                 cv2.imwrite(url + label_ext +"-composit/"+ key +"/cab_"+ image, needed_multi_channel_img3)
-
+    
     print("--> Done.")
+    return(url + label_ext +"-composit/")
 if __name__ == '__main__':
     # Specify Command line args
     parser = argparse.ArgumentParser(description="CEML - Process Images")

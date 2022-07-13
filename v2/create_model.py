@@ -81,11 +81,9 @@ def main(input_dir, model, cycles):
     print("--> Done!")
 
     # LEARN MODEL
-    for x in range(int(cycles)):
-        # fit cycles
-        print("--> Training model cycle=" + str(x))
-        learn.fit_one_cycle(1)
-        print("--> Done!")
+    print("--> Training model")
+    learn.fit_one_cycle(int(cycles)) # test this at some point 
+    print("--> Done!")
     
     # Create fig 3 - plot loss
     print("--> Create loss plot image...")
