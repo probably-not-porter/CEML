@@ -1,6 +1,7 @@
 import argparse, matplotlib, fastbook
 from fastai2 import *
 from fastai2.vision import *
+from fastai.test_utils import *
 from fastbook import *
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -16,15 +17,11 @@ def main(input_dir, model, cycles):
     # variables
     image_size = 224
     batch_size = 4
-
-
-    # Set up output holder
-    output_list = ["start time", "end time", ""]
-
-    # Get Start Time
     dateTimeObj = datetime.now()
     timestampStr = dateTimeObj.strftime("%d-%b-%Y_%H%M%S")
-    os.mkdir('output_' + timestampStr)
+    outdir = "results/" + input_dir.split("/")[-1] + '_' + model + '_' + str(cycles) + '_' + timestampStr
+    output_list = ["start time", "end time", ""]
+    os.mkdir(outdir)
     output_list[0] = "Start Time: " + timestampStr
 
     # count files to be processed
@@ -46,6 +43,17 @@ def main(input_dir, model, cycles):
     if model == 'resnet18': m = models.resnet18
     elif model == 'resnet34': m = models.resnet34
     elif model == 'resnet50': m = models.resnet50
+    elif model == 'resnet101': m = models.resnet101
+    elif model == 'resnet152': m = models.resnet152
+    elif model == 'squeezenet1_0': m = models.squeezenet1_0
+    elif model == 'squeezenet1_1': m = models.squeezenet1_1
+    elif model == 'densenet121': m = models.densenet121
+    elif model == 'densenet169': m = models.densenet169
+    elif model == 'densenet201': m = models.densenet201
+    elif model == 'densenet161': m = models.densenet161
+    elif model == 'vgg16_bn': m = models.vgg16_bn
+    elif model == 'vgg19_bn': m = models.vgg19_bn
+    elif model == 'alexnet': m = models.alexnet
     else: print("ERROR: Model not recognized.")
 
     # Setup for fastai
@@ -64,19 +72,19 @@ def main(input_dir, model, cycles):
 
     # Create CNN Learner
     dls = block.dataloaders(input_dir)
-    learn = cnn_learner(dls, m, metrics=error_rate)
+    learn = cnn_learner(dls, m, metrics=error_rate, cbs=CSVLogger(fname=outdir +'/epoch_stats.csv', append=False))
 
     # Create fig 1 - SAMPLE BATCH
     print("--> Create sample batch image...")
     dls.show_batch(nrows=4, ncols=3, show=True)
-    plt.savefig('output_' + timestampStr + '/sample_batch.png')
+    plt.savefig(outdir + '/sample_batch.png')
     clear_pyplot_memory()
     print("--> Done!")
 
     # Create fig 2 - learning rate
     print("--> Create learning rate plot image...")
     learn.lr_find(show_plot=True)
-    plt.savefig('output_' + timestampStr + '/learning_rate.png')
+    plt.savefig(outdir + '/learning_rate.png')
     clear_pyplot_memory()
     print("--> Done!")
 
@@ -88,7 +96,7 @@ def main(input_dir, model, cycles):
     # Create fig 3 - plot loss
     print("--> Create loss plot image...")
     learn.recorder.plot_loss()
-    plt.savefig('output_' + timestampStr + '/loss.png')
+    plt.savefig(outdir + '/loss.png')
     clear_pyplot_memory()
     print("--> Done!")
 
@@ -96,20 +104,20 @@ def main(input_dir, model, cycles):
     print("--> Create confusion matrix image...")
     interp = ClassificationInterpretation.from_learner(learn)
     interp.plot_confusion_matrix()
-    plt.savefig('output_' + timestampStr + '/conf_matrix.png')
+    plt.savefig(outdir + '/conf_matrix.png')
     clear_pyplot_memory()
     print("--> Done!")
 
     # Save model
     print("--> Saving Model...")
-    learn.export('output_' + timestampStr + '/model.pkl')
+    learn.export(outdir + '/model.pkl')
 
     # Write output file
     dateTimeObj = datetime.now()
     timestampStr2 = dateTimeObj.strftime("%d-%b-%Y_%H:%M:%S")
     output_list[1] = "End Time: " + timestampStr2
     
-    with open('output_' + timestampStr + '/meta.md', 'w') as f:
+    with open(outdir + '/meta.md', 'w') as f:
         for item in output_list:
             f.write("%s\n" % item)
 

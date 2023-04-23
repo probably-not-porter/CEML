@@ -17,7 +17,9 @@ def main(url, cannyAuto = False, cannyWide = False, cannyTight = False, original
     for classifier in os.listdir(url): # loop over each subfolder containing a classifier
         image_urls[classifier] = []
         for image in os.listdir(url + "/" + classifier):
-            image_urls[classifier].append(image)
+            if image[-4:] == ".png" or image[-4:] == ".jpg" or image[-4:] == "jpeg" or image[-4:] == ".JPG" or image[-4:] == "JPEG":
+                image_urls[classifier].append(image)
+        print(image_urls)
     
     if original:
         out_paths.append(url +"-cannyauto/")
