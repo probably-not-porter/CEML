@@ -1,4 +1,4 @@
-# Official Code - Composite Edge Detection in Convolutional Neural Networks
+# CEML v1
 ## Porter Libby - Senior Capstone Project Spring 2020
 
 Note: all original code is denoted with a tag at the top of the file.
