@@ -1,17 +1,21 @@
 #!/bin/sh
-#SBATCH --job-name CEML_control_model_resnet
+#SBATCH --job-name CEML_sobely_sobelx_original_resnet
 #SBATCH --nodes=1
 #SBATCH -c 3
 #SBATCH -t 72:00:00
-#SBATCH -o "CEML_control_model_resnet.out"
+#SBATCH -o "CEML_sobely_sobelx_original_resnet.out"
 #SBATCH --chdir=/code/CEML/v2
 
-DATA_DIR="../images/dogs_cats_parent/dogs_cats"
+DATA_DIR="../images/dogs_cats_parent/dogs_cats-sobel_x-sobel_y-composit"
 CYCLES=20
 
 echo "queue is `echo $SLURM_JOB_PARTITION`"
 echo "running on `echo $SLURM_JOB_NODELIST`"
 echo "work directory is `echo $SLURM_SUBMIT_DIR`"
+
+echo $(date)
+echo "CREATE COMPOSITE"
+srun python3 process_images.py -i "../images/dogs_cats_parent/dogs_cats" --sobel_x --sobel_y --original
 
 echo $(date)
 echo "RESNET18 MODEL"

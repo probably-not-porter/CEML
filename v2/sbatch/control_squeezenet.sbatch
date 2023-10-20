@@ -2,11 +2,11 @@
 #SBATCH --job-name CEML_control_model_squeezenet
 #SBATCH --nodes=1
 #SBATCH -c 3
-#SBATCH -t 500:00:00
+#SBATCH -t 72:00:00
 #SBATCH -o "CEML_control_model_squeezenet.out"
 #SBATCH --chdir=/code/CEML/v2
 
-DATA_DIR="../images/xray_parent/xray"
+DATA_DIR="../images/dogs_cats_parent/dogs_cats"
 CYCLES=20
 
 echo "queue is `echo $SLURM_JOB_PARTITION`"
